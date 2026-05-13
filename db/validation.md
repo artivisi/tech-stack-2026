@@ -4,11 +4,13 @@ Canonical rules. All three stacks must implement identically — comparing stack
 
 ## Fields
 
-| Field | Required | Min | Max | Format (regex) | Normalization |
-|-------|----------|-----|-----|----------------|---------------|
-| `email` | yes | 3 | 254 | `^[^\s@]+@[^\s@]+\.[^\s@]+$` | trim, lowercase |
-| `full_name` | yes | 2 | 100 | `^[\p{L}\p{M}\s.'\-]+$` (unicode letter, mark, space, `.`, `'`, `-`) | trim |
-| `phone` | yes | 7 | 20 | `^[+0-9 ()\-]+$` | trim |
+| Field (HTTP / form) | DB column | Required | Min | Max | Format (regex) | Normalization |
+|---------------------|-----------|----------|-----|-----|----------------|---------------|
+| `email` | `email` | yes | 3 | 254 | `^[^\s@]+@[^\s@]+\.[^\s@]+$` | trim, lowercase |
+| `fullName` | `full_name` | yes | 2 | 100 | `^[\p{L}\p{M}\s.'\-]+$` (unicode letter, mark, space, `.`, `'`, `-`) | trim |
+| `phone` | `phone` | yes | 7 | 20 | `^[+0-9 ()\-]+$` | trim |
+
+HTTP form field names use camelCase (`fullName`); DB column names use snake_case (`full_name`). Each stack maps between the two in its repository layer (Spring `RowMapper`, Express SQL alias, Go `db` struct tag).
 
 Lengths are **character count** (not byte count) after normalization.
 

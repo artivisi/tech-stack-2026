@@ -15,9 +15,9 @@
       {{#each registrations}}
         <tr class="border-t border-slate-200">
           <td class="px-4 py-2">{{this.email}}</td>
-          <td class="px-4 py-2">{{this.full_name}}</td>
+          <td class="px-4 py-2">{{this.fullName}}</td>
           <td class="px-4 py-2">{{this.phone}}</td>
-          <td class="px-4 py-2 text-slate-600 font-mono text-xs">{{formatDate this.created_at}}</td>
+          <td class="px-4 py-2 text-slate-600 font-mono text-xs">{{formatDate this.createdAt}}</td>
         </tr>
       {{else}}
         <tr><td class="px-4 py-6 text-center text-slate-500" colspan="4">No registrations yet.</td></tr>

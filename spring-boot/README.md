@@ -71,5 +71,5 @@ Read from repo-root `.env` via `run.sh`. Missing required vars cause startup to 
 ## Notes
 
 - No automated tests included — test infrastructure is taught as a separate unit. The Initializr-generated test class was removed.
-- Java side stays in camelCase (`fullName`). The HTML form field name `full_name` is bound via a `@ModelAttribute` factory method in the controller that takes `@RequestParam("full_name") String fullName` and constructs the record. The `@PostMapping` handler then uses `@Valid @ModelAttribute(binding=false)` so Spring doesn't re-bind from request (which would null the field since records are immutable and Spring would look for an `fullName` request param that doesn't exist).
+- HTML form field names and Java field names both use camelCase (`fullName`). The DB column is `full_name` — that mapping happens in `RegistrationRepository`'s `RowMapper` (`rs.getString("full_name")` → `Registration.fullName`).
 - DB-level CHECK constraints in `V1__create_registration.sql` mirror app-level Bean Validation rules. See `db/validation.md` at repo root.

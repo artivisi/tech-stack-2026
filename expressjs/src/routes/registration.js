@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 router.post('/register', async (req, res, next) => {
   const submitted = {
     email: req.body.email ?? '',
-    full_name: req.body.full_name ?? '',
+    fullName: req.body.fullName ?? '',
     phone: req.body.phone ?? '',
   };
 
@@ -39,12 +39,12 @@ router.post('/register', async (req, res, next) => {
     });
   }
 
-  const { email, full_name, phone } = result.data;
+  const { email, fullName, phone } = result.data;
 
   try {
     await pool.query(
       'INSERT INTO registration (id, email, full_name, phone, created_at) VALUES ($1, $2, $3, $4, $5)',
-      [randomUUID(), email, full_name, phone, new Date()],
+      [randomUUID(), email, fullName, phone, new Date()],
     );
     res.redirect('/registrations');
   } catch (err) {
@@ -61,7 +61,7 @@ router.post('/register', async (req, res, next) => {
 router.get('/registrations', async (req, res, next) => {
   try {
     const { rows } = await pool.query(
-      'SELECT id, email, full_name, phone, created_at FROM registration ORDER BY created_at DESC',
+      'SELECT id, email, full_name AS "fullName", phone, created_at AS "createdAt" FROM registration ORDER BY created_at DESC',
     );
     res.render('list', { registrations: rows, count: rows.length });
   } catch (err) {

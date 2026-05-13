@@ -12,7 +12,7 @@ export const RegistrationSchema = z.object({
     .min(3, 'valid email is required')
     .max(254, 'email is too long')
     .regex(EMAIL_RE, 'valid email is required'),
-  full_name: z
+  fullName: z
     .string()
     .trim()
     .min(2, 'full name must be 2-100 characters')

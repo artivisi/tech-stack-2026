@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -42,22 +41,17 @@ public class RegistrationController {
         return System.getProperty("java.version");
     }
 
-    @ModelAttribute("form")
-    public RegistrationForm createForm(
-            @RequestParam(value = "email", required = false) String email,
-            @RequestParam(value = "full_name", required = false) String fullName,
-            @RequestParam(value = "phone", required = false) String phone) {
-        return new RegistrationForm(email, fullName, phone);
-    }
-
     @GetMapping("/")
-    public String showForm() {
+    public String showForm(Model model) {
+        if (!model.containsAttribute("form")) {
+            model.addAttribute("form", new RegistrationForm(null, null, null));
+        }
         return "form";
     }
 
     @PostMapping("/register")
     public String register(
-            @Valid @ModelAttribute(name = "form", binding = false) RegistrationForm form,
+            @Valid @ModelAttribute("form") RegistrationForm form,
             BindingResult result,
             HttpServletResponse response) {
 

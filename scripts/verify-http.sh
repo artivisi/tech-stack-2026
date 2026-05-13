@@ -54,44 +54,44 @@ assert_status "GET /registrations"   "GET"  "/registrations"   ""  "200"
 echo
 echo "[valid registrations -> 302]"
 assert_status "plain ASCII"          "POST" "/register" \
-  "email=alice${TS}@example.com&full_name=Alice%20Doe&phone=08123456789" "302"
+  "email=alice${TS}@example.com&fullName=Alice%20Doe&phone=08123456789" "302"
 assert_status "uppercase email (normalized)" "POST" "/register" \
-  "email=BOB${TS}@example.com&full_name=Bob%20Smith&phone=08123456790" "302"
+  "email=BOB${TS}@example.com&fullName=Bob%20Smith&phone=08123456790" "302"
 assert_status "unicode name (Jose)"  "POST" "/register" \
-  "email=jose${TS}@example.com&full_name=Jos%C3%A9%20Rodr%C3%ADguez&phone=08123456791" "302"
+  "email=jose${TS}@example.com&fullName=Jos%C3%A9%20Rodr%C3%ADguez&phone=08123456791" "302"
 assert_status "apostrophe (O'Brien)" "POST" "/register" \
-  "email=obrien${TS}@example.com&full_name=Sean%20O%27Brien&phone=08123456792" "302"
+  "email=obrien${TS}@example.com&fullName=Sean%20O%27Brien&phone=08123456792" "302"
 assert_status "hyphen (Mary-Jane)"   "POST" "/register" \
-  "email=mj${TS}@example.com&full_name=Mary-Jane%20Watson&phone=08123456793" "302"
+  "email=mj${TS}@example.com&fullName=Mary-Jane%20Watson&phone=08123456793" "302"
 assert_status "phone with parens"    "POST" "/register" \
-  "email=parens${TS}@example.com&full_name=Test%20User&phone=%2B62%20%28811%29%20123-4567" "302"
+  "email=parens${TS}@example.com&fullName=Test%20User&phone=%2B62%20%28811%29%20123-4567" "302"
 
 echo
 echo "[invalid email -> 400]"
-assert_status "no @"          "POST" "/register" "email=invalid&full_name=Test%20User&phone=08123456789" "400"
-assert_status "no dot"        "POST" "/register" "email=a@b&full_name=Test%20User&phone=08123456789" "400"
-assert_status "space inside"  "POST" "/register" "email=a%20b@c.com&full_name=Test%20User&phone=08123456789" "400"
-assert_status "empty"         "POST" "/register" "email=&full_name=Test%20User&phone=08123456789" "400"
+assert_status "no @"          "POST" "/register" "email=invalid&fullName=Test%20User&phone=08123456789" "400"
+assert_status "no dot"        "POST" "/register" "email=a@b&fullName=Test%20User&phone=08123456789" "400"
+assert_status "space inside"  "POST" "/register" "email=a%20b@c.com&fullName=Test%20User&phone=08123456789" "400"
+assert_status "empty"         "POST" "/register" "email=&fullName=Test%20User&phone=08123456789" "400"
 
 echo
-echo "[invalid full_name -> 400]"
-assert_status "one char"      "POST" "/register" "email=n1${TS}@example.com&full_name=A&phone=08123456789" "400"
-assert_status "empty"         "POST" "/register" "email=n2${TS}@example.com&full_name=&phone=08123456789" "400"
-assert_status "digits"        "POST" "/register" "email=n3${TS}@example.com&full_name=Alice%203&phone=08123456789" "400"
-assert_status "@ in name"     "POST" "/register" "email=n4${TS}@example.com&full_name=Alice%40Doe&phone=08123456789" "400"
+echo "[invalid fullName -> 400]"
+assert_status "one char"      "POST" "/register" "email=n1${TS}@example.com&fullName=A&phone=08123456789" "400"
+assert_status "empty"         "POST" "/register" "email=n2${TS}@example.com&fullName=&phone=08123456789" "400"
+assert_status "digits"        "POST" "/register" "email=n3${TS}@example.com&fullName=Alice%203&phone=08123456789" "400"
+assert_status "@ in name"     "POST" "/register" "email=n4${TS}@example.com&fullName=Alice%40Doe&phone=08123456789" "400"
 
 echo
 echo "[invalid phone -> 400]"
-assert_status "too short"     "POST" "/register" "email=p1${TS}@example.com&full_name=Test%20User&phone=12345" "400"
-assert_status "letters"       "POST" "/register" "email=p2${TS}@example.com&full_name=Test%20User&phone=abc12345" "400"
-assert_status "empty"         "POST" "/register" "email=p3${TS}@example.com&full_name=Test%20User&phone=" "400"
+assert_status "too short"     "POST" "/register" "email=p1${TS}@example.com&fullName=Test%20User&phone=12345" "400"
+assert_status "letters"       "POST" "/register" "email=p2${TS}@example.com&fullName=Test%20User&phone=abc12345" "400"
+assert_status "empty"         "POST" "/register" "email=p3${TS}@example.com&fullName=Test%20User&phone=" "400"
 
 echo
 echo "[duplicate email -> 409]"
 assert_status "exact dup"     "POST" "/register" \
-  "email=alice${TS}@example.com&full_name=Someone%20Else&phone=08111111111" "409"
+  "email=alice${TS}@example.com&fullName=Someone%20Else&phone=08111111111" "409"
 assert_status "case dup"      "POST" "/register" \
-  "email=ALICE${TS}@example.com&full_name=Someone%20Else&phone=08111111112" "409"
+  "email=ALICE${TS}@example.com&fullName=Someone%20Else&phone=08111111112" "409"
 
 echo
 echo "---"
