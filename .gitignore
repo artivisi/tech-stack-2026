@@ -1,0 +1,83 @@
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Editors / IDEs ---
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+.project
+.classpath
+.settings/
+.factorypath
+nbproject/private/
+nbbuild/
+nbdist/
+
+# --- Logs / temp ---
+*.log
+logs/
+tmp/
+*.pid
+*.seed
+
+# --- Env / secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Docker volumes ---
+postgres-data/
+pgdata/
+
+# =========================
+# Spring Boot (Java / Maven / Gradle)
+# =========================
+spring-boot/target/
+spring-boot/build/
+spring-boot/.gradle/
+spring-boot/out/
+spring-boot/bin/
+spring-boot/!**/src/main/**/bin/
+spring-boot/!**/src/test/**/bin/
+spring-boot/!**/src/main/**/out/
+spring-boot/!**/src/test/**/out/
+spring-boot/HELP.md
+spring-boot/.mvn/wrapper/maven-wrapper.jar
+*.class
+hs_err_pid*.log
+replay_pid*.log
+
+# =========================
+# Express.js (Node)
+# =========================
+expressjs/node_modules/
+expressjs/dist/
+expressjs/coverage/
+expressjs/.npm/
+expressjs/.eslintcache
+expressjs/.parcel-cache/
+expressjs/.next/
+expressjs/.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Tailwind build output (keep source, ignore compiled)
+expressjs/public/css/tailwind.css
+expressjs/public/dist/
+
+# =========================
+# Go
+# =========================
+golang/bin/
+golang/dist/
+golang/vendor/
+golang/coverage.out
+golang/*.test
+golang/*.out
+golang/server
+golang/cmd/server/server
