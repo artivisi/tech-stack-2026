@@ -4,11 +4,11 @@ Single-table registration app implemented in three backend stacks for comparison
 
 ## Stacks
 
-| Stack | Language | Runtime | Web Framework |
-|-------|----------|---------|---------------|
-| `spring-boot/` | Java 21 | Spring Boot 4 | Spring MVC |
-| `expressjs/`   | Node.js | Express 5.1.0 | Express |
-| `golang/`      | Go 1.26 | net/http + chi/gin | stdlib templates |
+| Stack | Language | Runtime | Web Framework | Template Engine | Migrations |
+|-------|----------|---------|---------------|-----------------|------------|
+| `spring-boot/` | Java 21 | Spring Boot 4 | Spring MVC | Thymeleaf | Flyway |
+| `expressjs/`   | Node.js | Express 5.1.0 | Express | Handlebars (`express-handlebars`) | `node-pg-migrate` |
+| `golang/`      | Go 1.26 | net/http | `net/http.ServeMux` (stdlib) | `html/template` (stdlib) | `golang-migrate/migrate` |
 
 Each implementation is self-contained and runs independently against the shared PostgreSQL instance.
 
@@ -27,6 +27,8 @@ docker compose up -d db
 ```
 
 All three backends share the same schema and connect to the same database instance on `localhost:5432`.
+
+Each stack runs its own migration tool against the same database. Migrations are written as numbered SQL files (`V1__create_registration.sql` style for Flyway; `NNN_name.up.sql` / `.down.sql` for `node-pg-migrate` and `golang-migrate`). All three should produce an identical schema — only the runner differs.
 
 ## Domain
 
