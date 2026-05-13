@@ -28,7 +28,9 @@ docker compose up -d db
 
 All three backends share the same schema and connect to the same database instance on `localhost:5432`.
 
-Each stack runs its own migration tool against the same database. Migrations are written as numbered SQL files (`V1__create_registration.sql` style for Flyway; `NNN_name.up.sql` / `.down.sql` for `node-pg-migrate` and `golang-migrate`). All three should produce an identical schema — only the runner differs.
+Each stack runs its own migration tool against the same database. The canonical schema lives at [`db/schema.sql`](db/schema.sql) — every stack's migration must produce this exact structure. Migration file formats differ per tool (Flyway `V1__name.sql`, `node-pg-migrate` `<ts>_name.sql` with `-- Up`/`-- Down` markers, `golang-migrate` split `.up.sql` / `.down.sql`), but the resulting `registration` table is identical.
+
+Only run one migrator at a time against a given database.
 
 ## Domain
 
@@ -48,11 +50,26 @@ Endpoints (identical across stacks):
 | POST   | `/register`      | Submit registration          |
 | GET    | `/registrations` | List submitted registrations |
 
+## UI
+
+Each stack ships the same server-rendered layout (header, form/list nav, identical fields and columns). Stacks differ only in:
+
+- **Stack badge** in the header showing which runtime you're viewing
+- **Accent color palette**:
+  - Express → emerald
+  - Spring Boot → blue (planned)
+  - Go → cyan (planned)
+
+The form fields, validation messages, and list columns are identical across stacks so behavior comparisons stay apples-to-apples.
+
 ## Repository Layout
 
 ```
 tech-stack-2026/
 ├── docker-compose.yml      # PostgreSQL 18 alpine
+├── db/
+│   ├── schema.sql          # Canonical schema (source of truth)
+│   └── README.md
 ├── spring-boot/            # Spring Boot 4 implementation
 ├── expressjs/              # Express 5.1.0 implementation
 ├── golang/                 # Go 1.26 implementation

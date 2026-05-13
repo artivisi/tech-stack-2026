@@ -1,0 +1,28 @@
+{
+  "name": "registration-expressjs",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node --env-file=../.env --watch src/server.js",
+    "start": "node --env-file=../.env src/server.js",
+    "css:build": "tailwindcss -i ./src/styles/input.css -o ./public/css/app.css --minify",
+    "css:watch": "tailwindcss -i ./src/styles/input.css -o ./public/css/app.css --watch",
+    "migrate:up": "sh -c 'set -a && . ../.env && set +a && node-pg-migrate-esm up -m migrations'",
+    "migrate:down": "sh -c 'set -a && . ../.env && set +a && node-pg-migrate-esm down -m migrations'",
+    "migrate:create": "node-pg-migrate-esm create -m migrations --migration-file-language sql"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-handlebars": "^7.1.3",
+    "pg": "^8.13.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "node-pg-migrate": "^7.9.1",
+    "tailwindcss": "^4.0.0"
+  }
+}

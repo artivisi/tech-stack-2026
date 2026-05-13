@@ -1,0 +1,27 @@
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <div class="bg-emerald-50 text-emerald-900 px-4 py-2 text-sm border-b border-emerald-100">
+    {{count}} registered
+  </div>
+  <table class="min-w-full text-sm">
+    <thead class="bg-slate-100 text-left">
+      <tr>
+        <th class="px-4 py-2">Email</th>
+        <th class="px-4 py-2">Full name</th>
+        <th class="px-4 py-2">Phone</th>
+        <th class="px-4 py-2">Registered</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each registrations}}
+        <tr class="border-t border-slate-200">
+          <td class="px-4 py-2">{{this.email}}</td>
+          <td class="px-4 py-2">{{this.full_name}}</td>
+          <td class="px-4 py-2">{{this.phone}}</td>
+          <td class="px-4 py-2 text-slate-600 font-mono text-xs">{{formatDate this.created_at}}</td>
+        </tr>
+      {{else}}
+        <tr><td class="px-4 py-6 text-center text-slate-500" colspan="4">No registrations yet.</td></tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

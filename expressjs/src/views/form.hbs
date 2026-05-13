@@ -1,0 +1,27 @@
+<form method="post" action="/register" class="bg-white rounded-lg shadow p-6 space-y-4" novalidate>
+  <div>
+    <label class="block text-sm font-medium mb-1" for="email">Email</label>
+    <input id="email" name="email" type="email" autocomplete="email" value="{{values.email}}"
+           class="w-full rounded border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+    {{#if errors.email}}<p class="text-sm text-red-600 mt-1">{{errors.email}}</p>{{/if}}
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium mb-1" for="full_name">Full name</label>
+    <input id="full_name" name="full_name" type="text" autocomplete="name" value="{{values.full_name}}"
+           class="w-full rounded border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+    {{#if errors.full_name}}<p class="text-sm text-red-600 mt-1">{{errors.full_name}}</p>{{/if}}
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium mb-1" for="phone">Phone</label>
+    <input id="phone" name="phone" type="tel" autocomplete="tel" value="{{values.phone}}"
+           class="w-full rounded border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+    {{#if errors.phone}}<p class="text-sm text-red-600 mt-1">{{errors.phone}}</p>{{/if}}
+  </div>
+
+  <button type="submit"
+          class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded">
+    Register
+  </button>
+</form>
