@@ -69,7 +69,12 @@ tech-stack-2026/
 ├── docker-compose.yml      # PostgreSQL 18 alpine
 ├── db/
 │   ├── schema.sql          # Canonical schema (source of truth)
+│   ├── validation.md       # Canonical validation rules
 │   └── README.md
+├── scripts/                # Stack-agnostic verification scripts
+│   ├── reset-db.sh
+│   ├── verify-http.sh
+│   └── verify-db-constraints.sh
 ├── spring-boot/            # Spring Boot 4 implementation
 ├── expressjs/              # Express 5.1.0 implementation
 ├── golang/                 # Go 1.26 implementation
@@ -90,6 +95,19 @@ cd golang      && go run ./cmd/server
 ```
 
 All three serve on `http://localhost:8080` by default — run one at a time, or override the port per stack.
+
+## Verification
+
+`scripts/` contains stack-agnostic acceptance checks for every stack to satisfy:
+
+```bash
+./scripts/reset-db.sh
+# start one stack (Express / Spring Boot / Go) listening on :8080
+./scripts/verify-http.sh
+./scripts/verify-db-constraints.sh
+```
+
+These are not automated tests — they're cross-stack contract checks. See [`scripts/README.md`](scripts/README.md).
 
 ## Purpose
 
