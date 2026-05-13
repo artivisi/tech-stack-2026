@@ -14,7 +14,7 @@
 	<name>registration-spring-boot</name>
 	<description>Registration app - Spring Boot 4</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>25</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

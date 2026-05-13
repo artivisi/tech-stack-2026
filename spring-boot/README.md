@@ -1,12 +1,12 @@
 # spring-boot
 
-Registration app — Spring Boot 4.0.6, Java 21, Spring MVC, Thymeleaf (with `thymeleaf-layout-dialect`), `JdbcTemplate`, Flyway, Bean Validation, Tailwind CSS v4.
+Registration app — Spring Boot 4.0.6, Java 25, Spring MVC, Thymeleaf (with `thymeleaf-layout-dialect`), `JdbcTemplate`, Flyway, Bean Validation, Tailwind CSS v4.
 
 Color theme: **blue**.
 
 ## Prerequisites
 
-- JDK 21+
+- JDK 25+
 - Node.js 22+ (for Tailwind build only)
 - PostgreSQL running (`docker compose up -d db` from repo root)
 - Root `.env` populated (see root `.env.example`)
@@ -71,5 +71,5 @@ Read from repo-root `.env` via `run.sh`. Missing required vars cause startup to 
 ## Notes
 
 - No automated tests included — test infrastructure is taught as a separate unit. The Initializr-generated test class was removed.
-- The `RegistrationForm` record uses `full_name` (snake_case) to match the HTML form field name verbatim. This is the only place where snake_case leaks into Java; the `Registration` domain object uses `fullName`.
+- Java side stays in camelCase (`fullName`). The HTML form field name `full_name` is bound via a `@ModelAttribute` factory method in the controller that takes `@RequestParam("full_name") String fullName` and constructs the record. The `@PostMapping` handler then uses `@Valid @ModelAttribute(binding=false)` so Spring doesn't re-bind from request (which would null the field since records are immutable and Spring would look for an `fullName` request param that doesn't exist).
 - DB-level CHECK constraints in `V1__create_registration.sql` mirror app-level Bean Validation rules. See `db/validation.md` at repo root.

@@ -13,7 +13,7 @@ public record RegistrationForm(
         @NotBlank(message = "full name is required")
         @Size(min = 2, max = 100, message = "full name must be 2-100 characters")
         @Pattern(regexp = "^[\\p{L}\\p{M}\\s.'\\-]+$", message = "full name contains invalid characters")
-        String full_name,
+        String fullName,
 
         @NotBlank(message = "phone is required")
         @Size(min = 7, max = 20, message = "phone must be 7-20 characters")

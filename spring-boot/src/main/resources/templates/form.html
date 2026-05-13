@@ -17,11 +17,12 @@
 
         <div>
             <label class="block text-sm font-medium mb-1" for="full_name">Full name</label>
-            <input id="full_name" type="text" autocomplete="name" th:field="*{full_name}"
+            <input id="full_name" name="full_name" type="text" autocomplete="name"
+                   th:value="${form.fullName}"
                    class="w-full rounded border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <p th:if="${#fields.hasErrors('full_name')}"
+            <p th:if="${#fields.hasErrors('fullName')}"
                class="text-sm text-red-600 mt-1"
-               th:errors="*{full_name}"></p>
+               th:errors="*{fullName}"></p>
         </div>
 
         <div>
