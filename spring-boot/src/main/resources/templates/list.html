@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<body>
+<main layout:fragment="content">
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="bg-blue-50 text-blue-900 px-4 py-2 text-sm border-b border-blue-100">
+            <span th:text="${count}"></span> registered
+        </div>
+        <table class="min-w-full text-sm">
+            <thead class="bg-slate-100 text-left">
+            <tr>
+                <th class="px-4 py-2">Email</th>
+                <th class="px-4 py-2">Full name</th>
+                <th class="px-4 py-2">Phone</th>
+                <th class="px-4 py-2">Registered</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="r : ${registrations}" class="border-t border-slate-200">
+                <td class="px-4 py-2" th:text="${r.email}"></td>
+                <td class="px-4 py-2" th:text="${r.fullName}"></td>
+                <td class="px-4 py-2" th:text="${r.phone}"></td>
+                <td class="px-4 py-2 text-slate-600 font-mono text-xs"
+                    th:text="${r.createdAtFormatted}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(registrations)}">
+                <td class="px-4 py-6 text-center text-slate-500" colspan="4">No registrations yet.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

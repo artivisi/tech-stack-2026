@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<body>
+<main layout:fragment="content">
+    <form th:action="@{/register}" method="post" th:object="${form}"
+          class="bg-white rounded-lg shadow p-6 space-y-4" novalidate>
+        <div>
+            <label class="block text-sm font-medium mb-1" for="email">Email</label>
+            <input id="email" type="email" autocomplete="email" th:field="*{email}"
+                   class="w-full rounded border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <p th:if="${#fields.hasErrors('email')}"
+               class="text-sm text-red-600 mt-1"
+               th:errors="*{email}"></p>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1" for="full_name">Full name</label>
+            <input id="full_name" type="text" autocomplete="name" th:field="*{full_name}"
+                   class="w-full rounded border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <p th:if="${#fields.hasErrors('full_name')}"
+               class="text-sm text-red-600 mt-1"
+               th:errors="*{full_name}"></p>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1" for="phone">Phone</label>
+            <input id="phone" type="tel" autocomplete="tel" th:field="*{phone}"
+                   class="w-full rounded border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <p th:if="${#fields.hasErrors('phone')}"
+               class="text-sm text-red-600 mt-1"
+               th:errors="*{phone}"></p>
+        </div>
+
+        <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded">
+            Register
+        </button>
+    </form>
+</main>
+</body>
+</html>
