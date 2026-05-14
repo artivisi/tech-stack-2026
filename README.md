@@ -96,6 +96,10 @@ cd golang      && go run ./cmd/server
 
 All three serve on `http://localhost:8080` by default — run one at a time, or override the port per stack.
 
+## Course material
+
+Conceptual + per-stack walkthroughs for STMIK class use live in [`docs/`](docs/README.md). Covers web-app patterns, test fundamentals, testing tools, test types (Playwright / REST / integration / k6 perf), test infrastructure (Testcontainers, seed data, CSV-parameterized validation), CI/CD with an 80% coverage gate, and a request-to-response code walkthrough for each of the three stacks.
+
 ## Verification
 
 `scripts/` contains stack-agnostic acceptance checks for every stack to satisfy:
