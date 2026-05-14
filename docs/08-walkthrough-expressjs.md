@@ -9,7 +9,7 @@ classDiagram
     direction LR
 
     class NodeHttp {
-        +listen on :8080
+        +listen on port 8080
     }
     class ExpressApp {
         -middleware stack
@@ -48,8 +48,8 @@ classDiagram
     ExpressApp --> Router : matches POST /register
     Router --> RegistrationSchema : safeParse(req.body)
     Router --> PgPool : pool.query(INSERT)
-    Router --> ExpressResponse : res.redirect("/registrations")
-    Router --> HandlebarsEngine : res.render("form", data)
+    Router --> ExpressResponse : res.redirect
+    Router --> HandlebarsEngine : res.render form
 ```
 
 Compared to Spring Boot's diagram, Express is *much* flatter. There is no front-controller dispatch indirection, no annotation scanning, no separate handler-mapping/handler-adapter. The router is a sequence of `(method, path, handler)` tuples; matching is a linear walk.
@@ -93,7 +93,7 @@ sequenceDiagram
     H-->>R: returns
     R-->>A: returns
     A->>L: response 'finish' event
-    L->>L: log "POST /register 302 ##ms"
+    L->>L: log POST /register 302 ##ms
     A-->>N: 302 Location: /registrations
     N-->>C: HTTP 302
 ```

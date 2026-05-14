@@ -63,7 +63,7 @@ classDiagram
     Handler --> RegistrationRepo : Insert(reg)
     RegistrationRepo --> sql_DB : ExecContext
     sql_DB --> pgxStdlibDriver : driver.Exec
-    Handler --> Templates : Render(w, "form", data)
+    Handler --> Templates : Render form
 ```
 
 Even flatter than Express. Go's stdlib `net/http` *is* the framework — there's no separate dispatcher object. `ServeMux` does the matching; everything else is your own struct methods.
@@ -88,7 +88,7 @@ sequenceDiagram
     S->>L: ServeHTTP(w, r)
     L->>L: start = time.Now()<br/>wrap w in statusWriter
     L->>M: next.ServeHTTP(wrappedW, r)
-    M->>M: lookup "POST /register"
+    M->>M: lookup POST /register
     M->>H: SubmitForm(w, r)
     H->>F: r.ParseForm()
     F-->>H: nil
@@ -103,10 +103,10 @@ sequenceDiagram
     PG-->>SQL: 1 row
     SQL-->>R: nil
     R-->>H: nil
-    H->>H: http.Redirect(w, r,<br/>"/registrations", 302)
+    H->>H: http.Redirect to /registrations (302)
     H-->>M: returns
     M-->>L: returns
-    L->>L: log.Printf("POST /register 302 ##ms")
+    L->>L: log.Printf POST /register 302 ##ms
     L-->>S: returns
     S-->>C: HTTP 302
 ```

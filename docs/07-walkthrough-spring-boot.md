@@ -9,7 +9,7 @@ classDiagram
     direction LR
 
     class Tomcat {
-        +listen on :8080
+        +listen on port 8080
     }
     class DispatcherServlet {
         +doDispatch(req, res)
@@ -67,7 +67,7 @@ classDiagram
     RegistrationController --> RegistrationRepository : insert()
     RegistrationRepository --> JdbcTemplate : update()
     JdbcTemplate --> HikariDataSource : getConnection()
-    DispatcherServlet --> RedirectView : render "redirect:/registrations"
+    DispatcherServlet --> RedirectView : render redirect view
 ```
 
 Every layer above `RegistrationController` is Spring framework code; everything from the controller down is our code. That is the "under the hood" line for Spring Boot.
@@ -96,7 +96,7 @@ sequenceDiagram
     DS->>HM: getHandler(req)
     HM-->>DS: HandlerMethod(register())
     DS->>HA: handle(req, res, handler)
-    HA->>MAP: resolveArgument("form")
+    HA->>MAP: resolveArgument(form)
     MAP->>DB: new WebDataBinder(form)
     Note over DB: @InitBinder applies<br/>StringTrimmerEditor
     DB->>DB: bind(request params)
@@ -111,10 +111,10 @@ sequenceDiagram
     PG-->>JT: 1 row
     JT-->>RR: 1
     RR-->>RC: void
-    RC-->>HA: "redirect:/registrations"
-    HA-->>DS: ModelAndView("redirect:…")
+    RC-->>HA: view name redirect:/registrations
+    HA-->>DS: ModelAndView (redirect)
     DS->>RV: render()
-    RV->>T: setStatus(302)<br/>setHeader("Location", "/registrations")
+    RV->>T: status 302 + Location /registrations
     T-->>C: HTTP 302
 ```
 
