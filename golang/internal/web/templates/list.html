@@ -1,0 +1,29 @@
+{{define "content"}}
+<div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="bg-cyan-50 text-cyan-900 px-4 py-2 text-sm border-b border-cyan-100">
+        {{.Count}} registered
+    </div>
+    <table class="min-w-full text-sm">
+        <thead class="bg-slate-100 text-left">
+        <tr>
+            <th class="px-4 py-2">Email</th>
+            <th class="px-4 py-2">Full name</th>
+            <th class="px-4 py-2">Phone</th>
+            <th class="px-4 py-2">Registered</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{range .Registrations}}
+            <tr class="border-t border-slate-200">
+                <td class="px-4 py-2">{{.Email}}</td>
+                <td class="px-4 py-2">{{.FullName}}</td>
+                <td class="px-4 py-2">{{.Phone}}</td>
+                <td class="px-4 py-2 text-slate-600 font-mono text-xs">{{.CreatedAtFormatted}}</td>
+            </tr>
+        {{else}}
+            <tr><td class="px-4 py-6 text-center text-slate-500" colspan="4">No registrations yet.</td></tr>
+        {{end}}
+        </tbody>
+    </table>
+</div>
+{{end}}

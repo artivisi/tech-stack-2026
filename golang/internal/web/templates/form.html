@@ -1,0 +1,29 @@
+{{define "content"}}
+<form method="post" action="/register" class="bg-white rounded-lg shadow p-6 space-y-4" novalidate>
+    <div>
+        <label class="block text-sm font-medium mb-1" for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" value="{{.Values.email}}"
+               class="w-full rounded border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+        {{with .Errors.email}}<p class="text-sm text-red-600 mt-1">{{.}}</p>{{end}}
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium mb-1" for="fullName">Full name</label>
+        <input id="fullName" name="fullName" type="text" autocomplete="name" value="{{.Values.fullName}}"
+               class="w-full rounded border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+        {{with .Errors.fullName}}<p class="text-sm text-red-600 mt-1">{{.}}</p>{{end}}
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium mb-1" for="phone">Phone</label>
+        <input id="phone" name="phone" type="tel" autocomplete="tel" value="{{.Values.phone}}"
+               class="w-full rounded border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+        {{with .Errors.phone}}<p class="text-sm text-red-600 mt-1">{{.}}</p>{{end}}
+    </div>
+
+    <button type="submit"
+            class="bg-cyan-600 hover:bg-cyan-700 text-white font-medium px-4 py-2 rounded">
+        Register
+    </button>
+</form>
+{{end}}

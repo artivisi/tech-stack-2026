@@ -1,0 +1,31 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration — Go</title>
+    <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+<div class="max-w-3xl mx-auto p-6">
+    <header class="mb-6 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <h1 class="text-2xl font-semibold">Registration</h1>
+            <span class="inline-block bg-cyan-100 text-cyan-800 text-xs font-medium px-2.5 py-1 rounded">
+                Go 1.26
+            </span>
+        </div>
+        <nav class="space-x-4 text-sm">
+            <a href="/" class="text-cyan-700 hover:underline">Form</a>
+            <a href="/registrations" class="text-cyan-700 hover:underline">List</a>
+        </nav>
+    </header>
+    <main>{{block "content" .}}{{end}}</main>
+    <footer class="mt-8 text-xs text-slate-400">
+        Go {{goVersion}} · PostgreSQL 18
+    </footer>
+</div>
+</body>
+</html>
+{{end}}
