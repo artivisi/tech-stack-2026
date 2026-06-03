@@ -22,7 +22,9 @@
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.0",
-    "node-pg-migrate": "^7.9.1",
+    "jest": "^30.4.2",
+    "node-pg-migrate": "^8.0.4",
+    "supertest": "^7.2.2",
     "tailwindcss": "^4.0.0"
   }
 }
