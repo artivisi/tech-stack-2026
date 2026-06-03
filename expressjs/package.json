@@ -10,9 +10,9 @@
     "start": "node --env-file=../.env src/server.js",
     "css:build": "tailwindcss -i ./src/styles/input.css -o ./public/css/app.css --minify",
     "css:watch": "tailwindcss -i ./src/styles/input.css -o ./public/css/app.css --watch",
-    "migrate:up": "sh -c 'set -a && . ../.env && set +a && node-pg-migrate-esm up -m migrations'",
-    "migrate:down": "sh -c 'set -a && . ../.env && set +a && node-pg-migrate-esm down -m migrations'",
-    "migrate:create": "node-pg-migrate-esm create -m migrations --migration-file-language sql"
+    "migrate:up": "sh -c 'set -a && . ../.env && set +a && node-pg-migrate up -m migrations'",
+    "migrate:down": "sh -c 'set -a && . ../.env && set +a && node-pg-migrate down -m migrations'",
+    "migrate:create": "node-pg-migrate create -m migrations --migration-file-language sql"
   },
   "dependencies": {
     "express": "^5.1.0",
@@ -21,7 +21,10 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
     "@tailwindcss/cli": "^4.0.0",
+    "babel-jest": "^30.4.1",
     "jest": "^30.4.2",
     "node-pg-migrate": "^8.0.4",
     "supertest": "^7.2.2",

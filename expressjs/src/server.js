@@ -1,9 +1,9 @@
 import { createApp } from './app.js';
 import { required } from './env.js';
 import { pool } from './db.js';
+import app from './app.js';
 
 const port = Number(required('HTTP_PORT'));
-const app = createApp();
 
 const server = app.listen(port, () => {
   console.log(`registration-expressjs listening on http://localhost:${port}`);
