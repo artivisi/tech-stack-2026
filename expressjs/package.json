@@ -12,7 +12,12 @@
     "css:watch": "tailwindcss -i ./src/styles/input.css -o ./public/css/app.css --watch",
     "migrate:up": "sh -c 'set -a && . ../.env && set +a && node-pg-migrate up -m migrations'",
     "migrate:down": "sh -c 'set -a && . ../.env && set +a && node-pg-migrate down -m migrations'",
-    "migrate:create": "node-pg-migrate create -m migrations --migration-file-language sql"
+    "migrate:create": "node-pg-migrate create -m migrations --migration-file-language sql",
+    "test": "jest --runInBand --detectOpenHandles"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFiles": ["<rootDir>/jest.setup.cjs"]
   },
   "dependencies": {
     "express": "^5.1.0",
@@ -25,6 +30,8 @@
     "@babel/preset-env": "^7.29.7",
     "@tailwindcss/cli": "^4.0.0",
     "babel-jest": "^30.4.1",
+    "babel-plugin-transform-import-meta": "^2.3.3",
+    "dotenv": "^17.4.2",
     "jest": "^30.4.2",
     "node-pg-migrate": "^8.0.4",
     "supertest": "^7.2.2",
